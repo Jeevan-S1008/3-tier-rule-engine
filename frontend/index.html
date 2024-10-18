@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rule Engine UI</title>
+    <script>
+        async function createRule() {
+            const ruleString = document.getElementById("rule").value;
+            const response = await fetch('/create_rule', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ rule: ruleString }),
+            });
+            const result = await response.json();
+            document.getElementById('result').innerHTML = JSON.stringify(result);
+        }
+    </script>
+</head>
+<body>
+    <h1>Rule Engine</h1>
+    <input type="text" id="rule" placeholder="Enter rule">
+    <button onclick="createRule()">Create Rule</button>
+    <div id="result"></div>
+</body>
+</html>
